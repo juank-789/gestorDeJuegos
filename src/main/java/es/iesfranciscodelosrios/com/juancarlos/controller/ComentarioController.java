@@ -6,29 +6,30 @@ import es.iesfranciscodelosrios.com.juancarlos.DAO.ComentarioDAO;
 
 import java.util.List;
 
+
 public class ComentarioController {
 
-    public List<Comentario> obtenerTodos() {
+    public static List<Comentario> getAllComentarios() {
         return ComentarioDAO.findAll();
     }
 
-    public List<Comentario> obtenerPorJuego(Juego juego) {
-        return ComentarioDAO.findByJuegoEager(juego);  // o Lazy según el uso
-    }
-
-    public Comentario buscarPorId(int id) {
+    public static Comentario getComentarioById(int id) {
         return ComentarioDAO.findById(id);
     }
 
-    public Comentario insertar(Comentario c) {
-        return ComentarioDAO.insert(c);
+    public static List<Comentario> getComentariosByJuego(Juego juego) {
+        return ComentarioDAO.findByJuegoEager(juego);
     }
 
-    public void actualizar(Comentario c) {
-        ComentarioDAO.update(c);
+    public static void addComentario(Comentario comentario) {
+        ComentarioDAO.insert(comentario);
     }
 
-    public void eliminar(int id) {
+    public static void updateComentario(Comentario comentario) {
+        ComentarioDAO.update(comentario);
+    }
+
+    public static void deleteComentario(int id) {
         ComentarioDAO.delete(id);
     }
 }

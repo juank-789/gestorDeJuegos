@@ -7,25 +7,26 @@ import es.iesfranciscodelosrios.com.juancarlos.DAO.JuegoDAO;
 
 import java.util.List;
 
+
 public class JuegoController {
 
-    public List<Juego> obtenerTodosLosJuegos() {
+    public static List<Juego> getAllJuegos() {
         return JuegoDAO.findAll();
     }
 
-    public Juego buscarJuegoPorId(int id) {
+    public static Juego getJuegoById(int id) {
         return JuegoDAO.findById(id);
     }
 
-    public Juego insertarJuego(Juego juego) {
-        return JuegoDAO.insert(juego);
+    public static void addJuego(Juego juego) {
+        JuegoDAO.insert(juego);
     }
 
-    public void actualizarJuego(Juego juego) {
+    public static void updateJuego(Juego juego) {
         JuegoDAO.update(juego);
     }
 
-    public void eliminarJuego(int id) {
+    public static void deleteJuego(int id) {
         JuegoDAO.delete(id);
     }
 }

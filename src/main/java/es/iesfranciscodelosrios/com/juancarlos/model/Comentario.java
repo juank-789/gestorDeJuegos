@@ -1,26 +1,45 @@
 package es.iesfranciscodelosrios.com.juancarlos.model;
 
 
+
 import java.time.LocalDate;
 
 public class Comentario {
     private int id;
     private String texto;
     private LocalDate fecha;
+    private Juego juego;
 
-    private Juego juego; // relación N:1
+    public int getId() {
+        return id;
+    }
 
-    // Getters y setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getTexto() { return texto; }
-    public void setTexto(String texto) { this.texto = texto; }
+    public String getTexto() {
+        return texto;
+    }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 
-    public Juego getJuego() { return juego; }
-    public void setJuego(Juego juego) { this.juego = juego; }
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public Juego getJuego() {
+        return juego;
+    }
+
+    public void setJuego(Juego juego) {
+        this.juego = juego;
+    }
 }
 

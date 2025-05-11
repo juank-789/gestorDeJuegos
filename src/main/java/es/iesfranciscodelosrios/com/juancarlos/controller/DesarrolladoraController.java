@@ -6,25 +6,26 @@ import es.iesfranciscodelosrios.com.juancarlos.DAO.DesarrolladoraDAO;
 
 import java.util.List;
 
+
 public class DesarrolladoraController {
 
-    public List<Desarrolladora> obtenerTodas() {
+    public static List<Desarrolladora> getAllDesarrolladoras() {
         return DesarrolladoraDAO.findAll();
     }
 
-    public Desarrolladora buscarPorId(int id) {
+    public static Desarrolladora getDesarrolladoraById(int id) {
         return DesarrolladoraDAO.findById(id);
     }
 
-    public Desarrolladora insertar(Desarrolladora d) {
-        return DesarrolladoraDAO.insert(d);
+    public static void addDesarrolladora(Desarrolladora desarrolladora) {
+        DesarrolladoraDAO.insert(desarrolladora);
     }
 
-    public void actualizar(Desarrolladora d) {
-        DesarrolladoraDAO.update(d);
+    public static void updateDesarrolladora(Desarrolladora desarrolladora) {
+        DesarrolladoraDAO.update(desarrolladora);
     }
 
-    public void eliminar(int id) {
+    public static void deleteDesarrolladora(int id) {
         DesarrolladoraDAO.delete(id);
     }
 }

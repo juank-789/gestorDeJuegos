@@ -7,81 +7,40 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class DesarrolladoraDAO {
-
-        private static final String SQL_ALL = "SELECT * FROM desarrolladora";
-        private static final String SQL_FIND_BY_ID = "SELECT * FROM desarrolladora WHERE id=?";
-
-        public static List<Desarrolladora> findAllLazy() {
-            List<Desarrolladora> lista = new ArrayList<>();
-            try (Connection con = ConnectionDB.getConnection();
-                 Statement stmt = con.createStatement();
-                 ResultSet rs = stmt.executeQuery(SQL_ALL)) {
-
-                while (rs.next()) {
-                    Desarrolladora d = new Desarrolladora();
-                    d.setId(rs.getInt("id"));
-                    d.setNombre(rs.getString("nombre"));
-                    d.setPais(rs.getString("pais"));
-                    d.setJuegos(new ArrayList<>()); // Lazy
-                    lista.add(d);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            return lista;
-        }
-
-        public static Desarrolladora findByIdLazy(int id) {
-            Desarrolladora d = null;
-            try (Connection con = ConnectionDB.getConnection();
-                 PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
-                ps.setInt(1, id);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    d = new Desarrolladora();
-                    d.setId(rs.getInt("id"));
-                    d.setNombre(rs.getString("nombre"));
-                    d.setPais(rs.getString("pais"));
-                    d.setJuegos(new ArrayList<>());
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            return d;
-        }
-
-        public static Desarrolladora findByIdEager(int id) {
-            Desarrolladora d = findByIdLazy(id);
-            if (d != null) {
-                d.setJuegos(JuegoDAO.findByDesarrolladoraLazy(d));
-            }
-            return d;
-        }
+    private static final String SQL_ALL = "SELECT * FROM desarrolladora";
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM desarrolladora WHERE id=?";
+    private static final String SQL_INSERT = "INSERT INTO desarrolladora (nombre) VALUES (?)";
+    private static final String SQL_UPDATE = "UPDATE desarrolladora SET nombre=? WHERE id=?";
+    private static final String SQL_DELETE = "DELETE FROM desarrolladora WHERE id=?";
 
     public static List<Desarrolladora> findAll() {
-        List<Desarrolladora> lista = new ArrayList<>();
+        List<Desarrolladora> desarrolladoras = new ArrayList<>();
         try (Connection con = ConnectionDB.getConnection();
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM desarrolladora")) {
+             ResultSet rs = stmt.executeQuery(SQL_ALL)) {
 
             while (rs.next()) {
                 Desarrolladora d = new Desarrolladora();
                 d.setId(rs.getInt("id"));
                 d.setNombre(rs.getString("nombre"));
-                d.setJuegos(new ArrayList<>()); // Lazy por defecto
-                lista.add(d);
+                d.setJuegos(new ArrayList<>()); // Lazy
+                desarrolladoras.add(d);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return lista;
+        return desarrolladoras;
     }
 
     public static Desarrolladora findById(int id) {
         Desarrolladora d = null;
         try (Connection con = ConnectionDB.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT * FROM desarrolladora WHERE id = ?")) {
+             PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -89,7 +48,7 @@ public class DesarrolladoraDAO {
                 d = new Desarrolladora();
                 d.setId(rs.getInt("id"));
                 d.setNombre(rs.getString("nombre"));
-                d.setJuegos(new ArrayList<>());
+                d.setJuegos(JuegoDAO.findByDesarrolladora(d));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -99,7 +58,7 @@ public class DesarrolladoraDAO {
 
     public static void insert(Desarrolladora d) {
         try (Connection con = ConnectionDB.getConnection();
-             PreparedStatement ps = con.prepareStatement("INSERT INTO desarrolladora (nombre) VALUES (?)")) {
+             PreparedStatement ps = con.prepareStatement(SQL_INSERT)) {
 
             ps.setString(1, d.getNombre());
             ps.executeUpdate();
@@ -110,7 +69,7 @@ public class DesarrolladoraDAO {
 
     public static void update(Desarrolladora d) {
         try (Connection con = ConnectionDB.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE desarrolladora SET nombre = ? WHERE id = ?")) {
+             PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
 
             ps.setString(1, d.getNombre());
             ps.setInt(2, d.getId());
@@ -122,7 +81,7 @@ public class DesarrolladoraDAO {
 
     public static void delete(int id) {
         try (Connection con = ConnectionDB.getConnection();
-             PreparedStatement ps = con.prepareStatement("DELETE FROM desarrolladora WHERE id = ?")) {
+             PreparedStatement ps = con.prepareStatement(SQL_DELETE)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -130,7 +89,4 @@ public class DesarrolladoraDAO {
             throw new RuntimeException(e);
         }
     }
-
-
-
 }
