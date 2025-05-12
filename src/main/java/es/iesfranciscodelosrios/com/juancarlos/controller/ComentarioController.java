@@ -21,15 +21,19 @@ public class ComentarioController {
         return ComentarioDAO.findByJuegoEager(juego);
     }
 
-    public static void addComentario(Comentario comentario) {
-        ComentarioDAO.insert(comentario);
+    public static Comentario addComentario(Comentario comentario) {
+
+        return ComentarioDAO.insert(comentario);
     }
 
-    public static void updateComentario(Comentario comentario) {
-        ComentarioDAO.update(comentario);
+    public static boolean updateComentario(Comentario comentario) {
+
+        return ComentarioDAO.update(comentario);
+
     }
 
-    public static void deleteComentario(int id) {
-        ComentarioDAO.delete(id);
+    public static boolean deleteComentario(int id) {
+
+        return ComentarioDAO.delete(id);
     }
 }

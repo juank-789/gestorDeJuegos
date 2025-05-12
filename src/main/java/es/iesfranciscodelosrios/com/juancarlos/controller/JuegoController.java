@@ -1,6 +1,8 @@
 package es.iesfranciscodelosrios.com.juancarlos.controller;
 
 
+import es.iesfranciscodelosrios.com.juancarlos.model.Juego;
+
 
 import es.iesfranciscodelosrios.com.juancarlos.model.Juego;
 import es.iesfranciscodelosrios.com.juancarlos.DAO.JuegoDAO;
@@ -18,15 +20,17 @@ public class JuegoController {
         return JuegoDAO.findById(id);
     }
 
-    public static void addJuego(Juego juego) {
-        JuegoDAO.insert(juego);
+    public static Juego addJuego(Juego juego) {
+
+        return JuegoDAO.insert(juego);
     }
 
-    public static void updateJuego(Juego juego) {
-        JuegoDAO.update(juego);
+    public static boolean updateJuego(Juego juego) {
+
+        return JuegoDAO.update(juego);
     }
 
-    public static void deleteJuego(int id) {
-        JuegoDAO.delete(id);
+    public static boolean deleteJuego(int id) {
+        return JuegoDAO.delete(id);
     }
 }

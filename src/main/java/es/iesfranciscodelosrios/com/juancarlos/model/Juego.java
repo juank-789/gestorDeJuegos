@@ -9,6 +9,35 @@ public class Juego {
     private Desarrolladora desarrolladora;
     private List<Comentario> comentarios;
 
+    public Juego() {
+
+    }
+
+    public Juego (int id){
+        this.id = id;
+    }
+
+    public Juego(int id, String titulo, String genero) {
+        this.id = id;
+        this.titulo = titulo;
+        this.genero = genero;
+    }
+
+    public Juego(int id, String titulo, String genero, Desarrolladora desarrolladora) {
+        this.id = id;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.desarrolladora = desarrolladora;
+    }
+
+    public Juego(int id, String titulo, String genero, Desarrolladora desarrolladora, List<Comentario> comentarios) {
+        this.id = id;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.desarrolladora = desarrolladora;
+        this.comentarios = comentarios;
+    }
+
     public int getId() {
         return id;
     }

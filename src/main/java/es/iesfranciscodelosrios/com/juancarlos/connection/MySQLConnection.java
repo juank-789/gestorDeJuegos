@@ -5,12 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLConnection {
-        private static Connection con = null;
-        private static final String file = "connection.xml";
-        private static MySQLConnection _instance;
+    private static Connection con = null;
+    private static final String file = "connection.xml";
+    private static MySQLConnection _instance;
+    private static MySQLproperties properties;
 
     private MySQLConnection() {
-        MySQLproperties properties = (MySQLproperties) XMLManager.readXML(new MySQLproperties(), file);
+        properties = (MySQLproperties) XMLManager.readXML(new MySQLproperties(), file);
 
         try {
             con = DriverManager.getConnection(properties.getURL(), properties.getUser(), properties.getPass());
@@ -30,11 +31,18 @@ public class MySQLConnection {
         }
     }
 
-    public static MySQLConnection getConnection() {
-        if (_instance == null) {
-            _instance = new MySQLConnection();
+    public static Connection getConnection() {
+        if (con == null) {
+            try {
+                con = DriverManager.getConnection(properties.getURL(), properties.getUser(), properties.getPass());
+            } catch (SQLException SQLe) {
+                throw new RuntimeException(SQLe);
+            }
         }
-        return _instance;
+        return con;
     }
 
+    public static MySQLConnection build() {
+        return new MySQLConnection();
+    }
 }

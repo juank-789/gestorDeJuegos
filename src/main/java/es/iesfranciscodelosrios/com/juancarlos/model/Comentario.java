@@ -10,6 +10,21 @@ public class Comentario {
     private LocalDate fecha;
     private Juego juego;
 
+    public Comentario() {
+
+    }
+
+    public Comentario(int id) {
+        this.id = id;
+    }
+
+    public Comentario(int id, String texto, LocalDate fecha, Juego juego) {
+        this.id = id;
+        this.texto = texto;
+        this.fecha = fecha;
+        this.juego = juego;
+    }
+
     public int getId() {
         return id;
     }

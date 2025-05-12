@@ -17,15 +17,15 @@ public class DesarrolladoraController {
         return DesarrolladoraDAO.findById(id);
     }
 
-    public static void addDesarrolladora(Desarrolladora desarrolladora) {
-        DesarrolladoraDAO.insert(desarrolladora);
+    public static Desarrolladora addDesarrolladora(Desarrolladora desarrolladora) {
+        return DesarrolladoraDAO.insert(desarrolladora);
     }
 
-    public static void updateDesarrolladora(Desarrolladora desarrolladora) {
-        DesarrolladoraDAO.update(desarrolladora);
+    public static boolean updateDesarrolladora(Desarrolladora desarrolladora) {
+        return DesarrolladoraDAO.update(desarrolladora);
     }
 
-    public static void deleteDesarrolladora(int id) {
-        DesarrolladoraDAO.delete(id);
+    public static boolean deleteDesarrolladora(int id) {
+        return DesarrolladoraDAO.delete(id);
     }
 }
