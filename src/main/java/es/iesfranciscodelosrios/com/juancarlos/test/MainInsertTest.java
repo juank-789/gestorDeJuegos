@@ -1,4 +1,4 @@
-package es.iesfranciscodelosrios.com.juancarlos;
+package es.iesfranciscodelosrios.com.juancarlos.test;
 
 
 import es.iesfranciscodelosrios.com.juancarlos.controller.ComentarioController;

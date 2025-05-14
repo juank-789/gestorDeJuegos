@@ -24,16 +24,20 @@ public class ComentarioDAO {
 
     public static List<Comentario> findAll() {
         List<Comentario> comentarios = new ArrayList<>();
-        try (Connection con = MySQLConnection.getConnection();
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL_ALL)) {
+        Connection con = MySQLConnection.getConnection();
+        try (
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(SQL_ALL)) {
 
             while (rs.next()) {
                 Comentario c = new Comentario();
                 c.setId(rs.getInt("id"));
                 c.setTexto(rs.getString("texto"));
                 c.setFecha(rs.getDate("fecha").toLocalDate());
-                c.setJuego(null); // Lazy
+
+                int idJuego = rs.getInt("juego_id");
+                Juego j = JuegoDAO.findById(idJuego); // ← Esto soluciona el problema
+                c.setJuego(j);
                 comentarios.add(c);
             }
         } catch (SQLException e) {
@@ -44,8 +48,9 @@ public class ComentarioDAO {
 
     public static Comentario findById(int id) {
         Comentario c = null;
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -62,10 +67,36 @@ public class ComentarioDAO {
         return c;
     }
 
+    public static Comentario findByIdEager(int id) {
+        Comentario c = null;
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                c = new Comentario();
+                c.setId(rs.getInt("id"));
+                c.setTexto(rs.getString("texto"));
+                c.setFecha(rs.getDate("fecha").toLocalDate());
+
+                int idJuego = rs.getInt("juego_id");
+                Juego j = JuegoDAO.findById(idJuego); // ← Esto soluciona el problema
+                c.setJuego(j);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return c;
+    }
+
+
     public static List<Comentario> findByJuegoEager(Juego juego) {
         List<Comentario> comentarios = new ArrayList<>();
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_JUEGO)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_JUEGO)) {
 
             ps.setInt(1, juego.getId());
             ResultSet rs = ps.executeQuery();
@@ -97,8 +128,9 @@ public class ComentarioDAO {
     }*/
 
     public static Comentario insert(Comentario c) {
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, c.getTexto());
             ps.setDate(2, Date.valueOf(c.getFecha()));
@@ -135,8 +167,9 @@ public class ComentarioDAO {
     }*/
 
     public static boolean update(Comentario c) {
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
 
             ps.setString(1, c.getTexto());
             ps.setDate(2, Date.valueOf(c.getFecha()));
@@ -150,8 +183,9 @@ public class ComentarioDAO {
     }
 
     public static boolean delete(int id) {
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_DELETE)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_DELETE)) {
 
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;

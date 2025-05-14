@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:controller="es.iesfranciscodelosrios.com.juancarlos.view.MainViewController"
+            xmlns:fx="http://javafx.com/fxml"
+            prefWidth="800" prefHeight="600">
+
+    <top>
+        <Label text="Gestor de Juegos" style="-fx-font-size: 24px; -fx-padding: 10;" />
+    </top>
+
+    <center>
+        <TabPane fx:id="tabPane">
+            <Tab text="Juegos">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <TableView fx:id="tablaJuegos">
+                        <columns>
+                            <TableColumn fx:id="colTitulo" text="Título" />
+                            <TableColumn fx:id="colGenero" text="Género" />
+                            <TableColumn fx:id="colDesarrolladora" text="Desarrolladora" />
+                        </columns>
+                    </TableView>
+
+                    <HBox spacing="10">
+                        <Button text="Insertar" onAction="#onInsertJuego"/>
+                        <Button text="Actualizar" onAction="#onUpdateJuego"/>
+                        <Button text="Eliminar" onAction="#onDeleteJuego"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Desarrolladoras">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <TableView fx:id="tablaDesarrolladoras">
+                        <columns>
+                            <TableColumn fx:id="colNombreDes" text="Nombre" />
+                            <TableColumn fx:id="colPais" text="Pais" />
+                        </columns>
+                    </TableView>
+
+                    <HBox spacing="10">
+                        <Button text="Insertar" onAction="#onInsertDesarrolladora"/>
+                        <Button text="Actualizar" onAction="#onUpdateDesarrolladora"/>
+                        <Button text="Eliminar" onAction="#onDeleteDesarrolladora"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Comentarios">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <TableView fx:id="tablaComentarios">
+                        <columns>
+                            <TableColumn fx:id="colTexto" text="Texto" />
+                            <TableColumn fx:id="colFecha" text="Fecha" />
+                            <TableColumn fx:id="colJuego" text="Juego" />
+                        </columns>
+                    </TableView>
+
+                    <HBox spacing="10">
+                        <Button text="Insertar" onAction="#onInsertComentario"/>
+                        <Button text="Actualizar" onAction="#onUpdateComentario"/>
+                        <Button text="Eliminar" onAction="#onDeleteComentario"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+
+</BorderPane>

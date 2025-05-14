@@ -77,4 +77,9 @@ public class Juego {
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
+
+    @Override
+    public String toString() {
+        return titulo;
+    }
 }

@@ -14,7 +14,7 @@ public class ComentarioController {
     }
 
     public static Comentario getComentarioById(int id) {
-        return ComentarioDAO.findById(id);
+        return ComentarioDAO.findByIdEager(id);
     }
 
     public static List<Comentario> getComentariosByJuego(Juego juego) {

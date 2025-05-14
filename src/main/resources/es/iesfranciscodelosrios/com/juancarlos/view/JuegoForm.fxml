@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="es.iesfranciscodelosrios.com.juancarlos.view.JuegoFormController"
+      spacing="10">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Formulario de Juego" style="-fx-font-size: 18;" />
+
+    <HBox spacing="10">
+        <Label text="Título:" minWidth="100"/>
+        <TextField fx:id="txtTitulo" prefWidth="300"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Género:" minWidth="100"/>
+        <TextField fx:id="txtGenero" prefWidth="300"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Desarrolladora:" minWidth="100"/>
+        <ComboBox fx:id="desarrolladora_id" prefWidth="300"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Guardar" onAction="#onGuardar"/>
+        <Button text="Cancelar" onAction="#onCancelar"/>
+    </HBox>
+
+</VBox>

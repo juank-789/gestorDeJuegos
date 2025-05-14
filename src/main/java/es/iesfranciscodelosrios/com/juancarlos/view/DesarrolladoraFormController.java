@@ -1,0 +1,83 @@
+package es.iesfranciscodelosrios.com.juancarlos.view;
+
+import es.iesfranciscodelosrios.com.juancarlos.controller.DesarrolladoraController;
+import es.iesfranciscodelosrios.com.juancarlos.model.Desarrolladora;
+import es.iesfranciscodelosrios.com.juancarlos.model.Juego;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class DesarrolladoraFormController implements Initializable {
+
+    @FXML
+    private TextField nombreField;
+
+    @FXML
+    private TextField paisField;
+
+    private Desarrolladora desarrolladora;
+
+    private static Desarrolladora desarrolladoraActual;
+    private static Stage ventana;
+
+
+
+    public static void mostrarFormulario(Desarrolladora desarrolladora) {
+        desarrolladoraActual = desarrolladora;
+        ventana = FormularioUtil.mostrarVentana("DesarrolladoraForm.fxml", "Formulario de Desarrolladora");
+    }
+
+    public static void setDesarrolladora(Desarrolladora d) {
+        desarrolladoraActual = d;
+
+    }
+
+    private void setDes(Desarrolladora d) {
+        this.desarrolladora = d;
+        if (d != null) {
+            nombreField.setText(d.getNombre());
+            paisField.setText(d.getPais());
+        }
+    }
+
+    @FXML
+    private void onGuardar() {
+        if (desarrolladora == null) {
+            desarrolladora = new Desarrolladora();
+        }
+
+        desarrolladora.setNombre(nombreField.getText());
+        desarrolladora.setPais(paisField.getText());
+        desarrolladora.setJuegos(new ArrayList<>());
+
+        System.out.println("Guardando: " + desarrolladora);
+        if (desarrolladora.getId() > 0) {
+            DesarrolladoraController.updateDesarrolladora(desarrolladora);
+        } else {
+            DesarrolladoraController.addDesarrolladora(desarrolladora);
+        }
+
+        cerrarVentana();
+    }
+
+
+    @FXML
+    private void onCancelar() {
+        cerrarVentana();
+    }
+
+    private void cerrarVentana() {
+        Stage stage = (Stage) nombreField.getScene().getWindow();
+        stage.close();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setDes(desarrolladoraActual);
+    }
+}

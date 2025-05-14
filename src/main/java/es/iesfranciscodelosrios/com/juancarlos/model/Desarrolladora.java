@@ -60,4 +60,9 @@ public class Desarrolladora {
     public void setJuegos(List<Juego> juegos) {
         this.juegos = juegos;
     }
+
+    @Override
+    public String toString() {
+        return  nombre;
+    }
 }

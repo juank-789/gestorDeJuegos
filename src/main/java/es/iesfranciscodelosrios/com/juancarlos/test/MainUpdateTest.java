@@ -1,4 +1,4 @@
-package es.iesfranciscodelosrios.com.juancarlos;
+package es.iesfranciscodelosrios.com.juancarlos.test;
 
 
 import es.iesfranciscodelosrios.com.juancarlos.controller.ComentarioController;
@@ -13,14 +13,14 @@ import java.time.LocalDate;
 public class MainUpdateTest {
     public static void main(String[] args) {
         // Actualizar Desarrolladora con ID 1
-        Desarrolladora d = DesarrolladoraController.getDesarrolladoraById(5);
+        Desarrolladora d = DesarrolladoraController.getDesarrolladoraById(7);
         if (d != null) {
             d.setNombre("Nintendo Actualizado");
             DesarrolladoraController.updateDesarrolladora(d);
         }
 
         // Actualizar Juego con ID 1
-        Juego j = JuegoController.getJuegoById(11);
+        Juego j = JuegoController.getJuegoById(13);
         if (j != null) {
             j.setTitulo("Zelda Breath of the Wild");
             j.setGenero("Aventura Épica");
@@ -28,7 +28,7 @@ public class MainUpdateTest {
         }
 
         // Actualizar Comentario con ID 1
-        Comentario c = ComentarioController.getComentarioById(7);
+        Comentario c = ComentarioController.getComentarioById(9);
         if (c != null) {
             c.setTexto("Juego impresionante");
             c.setFecha(LocalDate.now());

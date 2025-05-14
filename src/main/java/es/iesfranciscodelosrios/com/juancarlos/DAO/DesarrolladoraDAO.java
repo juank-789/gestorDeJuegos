@@ -15,22 +15,24 @@ import java.util.List;
 public class DesarrolladoraDAO {
     private static final String SQL_ALL = "SELECT * FROM desarrolladora";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM desarrolladora WHERE id=?";
-    private static final String SQL_INSERT = "INSERT INTO desarrolladora (nombre) VALUES (?)";
-    private static final String SQL_UPDATE = "UPDATE desarrolladora SET nombre=? WHERE id=?";
+    private static final String SQL_INSERT = "INSERT INTO desarrolladora (nombre, pais) VALUES (?, ?)";
+    private static final String SQL_UPDATE = "UPDATE desarrolladora SET nombre=?, pais=? WHERE id=?";
     private static final String SQL_DELETE = "DELETE FROM desarrolladora WHERE id=?";
 
 
 
     public static List<Desarrolladora> findAll() {
         List<Desarrolladora> desarrolladoras = new ArrayList<>();
-        try (Connection con = MySQLConnection.build().getConnection();
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL_ALL)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(SQL_ALL)) {
 
             while (rs.next()) {
                 Desarrolladora d = new Desarrolladora();
                 d.setId(rs.getInt("id"));
                 d.setNombre(rs.getString("nombre"));
+                d.setPais(rs.getString("pais"));
                 d.setJuegos(new ArrayList<>()); // Lazy
                 desarrolladoras.add(d);
             }
@@ -42,8 +44,9 @@ public class DesarrolladoraDAO {
 
     public static Desarrolladora findById(int id) {
         Desarrolladora d = null;
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_FIND_BY_ID)) {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -51,6 +54,7 @@ public class DesarrolladoraDAO {
                 d = new Desarrolladora();
                 d.setId(rs.getInt("id"));
                 d.setNombre(rs.getString("nombre"));
+                d.setPais(rs.getString("pais"));
                 d.setJuegos(JuegoDAO.findByDesarrolladora(d));
             }
         } catch (SQLException e) {
@@ -72,10 +76,12 @@ public class DesarrolladoraDAO {
 */
 
     public static Desarrolladora insert(Desarrolladora d) {
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, d.getNombre());
+            ps.setString(2, d.getPais());
 
             int filas = ps.executeUpdate();
 
@@ -107,11 +113,13 @@ public class DesarrolladoraDAO {
     }*/
 
     public static boolean update(Desarrolladora d) {
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
 
             ps.setString(1, d.getNombre());
-            ps.setInt(2, d.getId());
+            ps.setString(2, d.getPais());
+            ps.setInt(3, d.getId());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -120,8 +128,9 @@ public class DesarrolladoraDAO {
     }
 
     public static boolean delete(int id) {
-        try (Connection con = MySQLConnection.build().getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_DELETE)) {
+        Connection con = MySQLConnection.build().getConnection();
+        try (
+                PreparedStatement ps = con.prepareStatement(SQL_DELETE)) {
 
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
