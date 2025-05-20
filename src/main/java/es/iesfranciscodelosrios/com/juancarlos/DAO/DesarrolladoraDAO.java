@@ -20,7 +20,10 @@ public class DesarrolladoraDAO {
     private static final String SQL_DELETE = "DELETE FROM desarrolladora WHERE id=?";
 
 
-
+    /**
+     * Obtiene todas las desarrolladoras de la base de datos.
+     * @return Lista de desarrolladoras.
+     */
     public static List<Desarrolladora> findAll() {
         List<Desarrolladora> desarrolladoras = new ArrayList<>();
         Connection con = MySQLConnection.build().getConnection();
@@ -42,6 +45,11 @@ public class DesarrolladoraDAO {
         return desarrolladoras;
     }
 
+    /**
+     * Obtiene una desarrolladora por su ID.
+     * @param id
+     * @return Desarrolladora con el ID especificado.
+     */
     public static Desarrolladora findById(int id) {
         Desarrolladora d = null;
         Connection con = MySQLConnection.build().getConnection();
@@ -63,18 +71,12 @@ public class DesarrolladoraDAO {
         return d;
     }
 
-    /*public static void insert(Desarrolladora d) {
-        try (Connection con = MySQLConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_INSERT)) {
 
-            ps.setString(1, d.getNombre());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-*/
-
+    /**
+     * Inserta una nueva desarrolladora en la base de datos.
+     * @param d
+     * @return Desarrolladora insertada con su ID generado.
+     */
     public static Desarrolladora insert(Desarrolladora d) {
         Connection con = MySQLConnection.build().getConnection();
         try (
@@ -100,18 +102,11 @@ public class DesarrolladoraDAO {
     }
 
 
-    /*public static void update(Desarrolladora d) {
-        try (Connection con = MySQLConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
-
-            ps.setString(1, d.getNombre());
-            ps.setInt(2, d.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
+    /**
+     * Actualiza una desarrolladora existente en la base de datos.
+     * @param d
+     * @return true si se actualizó correctamente, false en caso contrario.
+     */
     public static boolean update(Desarrolladora d) {
         Connection con = MySQLConnection.build().getConnection();
         try (
@@ -127,6 +122,11 @@ public class DesarrolladoraDAO {
         }
     }
 
+    /**
+     * Elimina una desarrolladora de la base de datos.
+     * @param id
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
     public static boolean delete(int id) {
         Connection con = MySQLConnection.build().getConnection();
         try (

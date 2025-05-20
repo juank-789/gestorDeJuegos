@@ -12,6 +12,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectionDB {
+    /**
+     * Clase que se encarga de gestionar la conexión a la base de datos
+     */
     private static ConfigDB config;
 
     static {
@@ -25,6 +28,10 @@ public class ConnectionDB {
         }
     }
 
+    /**
+     * Método que devuelve una conexión a la base de datos
+     * @return un objeto Connection
+     */
     public static Connection getConnection() {
         try {
             return DriverManager.getConnection(

@@ -22,28 +22,11 @@ public class JuegoDAO {
     private static final String SQL_UPDATE = "UPDATE juego SET titulo=?, genero=?, desarrolladora_id=? WHERE id=?";
     private static final String SQL_DELETE = "DELETE FROM juego WHERE id=?";
 
-    /*public static List<Juego> findAll() {
-        List<Juego> juegos = new ArrayList<>();
-        Connection con = MySQLConnection.build().getConnection();
-        try (
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL_ALL)) {
 
-            while (rs.next()) {
-                Juego j = new Juego();
-                j.setId(rs.getInt("id"));
-                j.setTitulo(rs.getString("titulo"));
-                j.setGenero(rs.getString("genero"));
-                j.setDesarrolladora(null); // Lazy
-                j.setComentarios(new ArrayList<>()); // Lazy
-                juegos.add(j);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return juegos;
-    }*/
-
+    /**
+     * * Método para obtener todos los juegos de la base de datos.
+     * @return Lista de objetos Juego.
+     */
     public static List<Juego> findAll() {
         List<Juego> juegos = new ArrayList<>();
         Connection con = MySQLConnection.build().getConnection();
@@ -77,6 +60,11 @@ public class JuegoDAO {
     }
 
 
+    /**
+     * Método para obtener un juego por su ID.
+     * @param id
+     * @return Juego
+     */
     public static Juego findById(int id) {
         Juego j = null;
         Connection con = MySQLConnection.build().getConnection();
@@ -100,6 +88,11 @@ public class JuegoDAO {
         return j;
     }
 
+    /**
+     * Método para obtener todos los juegos de una desarrolladora.
+     * @param d
+     * @return Lista de objetos Juego.
+     */
     public static List<Juego> findByDesarrolladora(Desarrolladora d) {
         List<Juego> juegos = new ArrayList<>();
         Connection con = MySQLConnection.build().getConnection();
@@ -123,19 +116,12 @@ public class JuegoDAO {
         return juegos;
     }
 
-    /*public static void insert(Juego juego) {
-        try (Connection con = MySQLConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_INSERT)) {
 
-            ps.setString(1, juego.getTitulo());
-            ps.setString(2, juego.getGenero());
-            ps.setInt(3, juego.getDesarrolladora().getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
+    /**
+     * Método para insertar un nuevo juego en la base de datos.
+     * @param juego
+     * @return Juego
+     */
     public static Juego insert(Juego juego) {
         Connection con = MySQLConnection.build().getConnection();
         try (
@@ -161,20 +147,12 @@ public class JuegoDAO {
         }
     }
 
-    /*public static void update(Juego juego) {
-        try (Connection con = MySQLConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
 
-            ps.setString(1, juego.getTitulo());
-            ps.setString(2, juego.getGenero());
-            ps.setInt(3, juego.getDesarrolladora().getId());
-            ps.setInt(4, juego.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
+    /**
+     * Método para actualizar un juego en la base de datos.
+     * @param juego
+     * @return boolean
+     */
     public static boolean update(Juego juego) {
         Connection con = MySQLConnection.build().getConnection();
         try (
@@ -192,6 +170,11 @@ public class JuegoDAO {
     }
 
 
+    /**
+     * Método para eliminar un juego de la base de datos.
+     * @param id
+     * @return boolean
+     */
     public static boolean delete(int id) {
         Connection con = MySQLConnection.build().getConnection();
         try (

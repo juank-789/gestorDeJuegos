@@ -8,26 +8,32 @@ public class Desarrolladora {
     private String pais;
     private List<Juego> juegos;
 
+    // Constructor por defecto
     public Desarrolladora() {
 
     }
 
+    // Constructor con parámetros
     public Desarrolladora(int id) {
         this.id = id;
     }
 
+    // Constructor con parámetros
     public Desarrolladora(int id, String nombre, String pais) {
         this.id = id;
         this.nombre = nombre;
         this.pais = pais;
     }
 
+    // Constructor full equip
     public Desarrolladora(int id, String nombre, String pais, List<Juego> juegos) {
         this.id = id;
         this.nombre = nombre;
         this.pais = pais;
         this.juegos = juegos;
     }
+
+    // Getters y Setters
 
     public int getId() {
         return id;

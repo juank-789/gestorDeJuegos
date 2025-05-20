@@ -9,20 +9,24 @@ public class Juego {
     private Desarrolladora desarrolladora;
     private List<Comentario> comentarios;
 
+    // Constructor por defecto
     public Juego() {
 
     }
 
+    // Constructor con id
     public Juego (int id){
         this.id = id;
     }
 
+    // Constructor con id, titulo y genero
     public Juego(int id, String titulo, String genero) {
         this.id = id;
         this.titulo = titulo;
         this.genero = genero;
     }
 
+    // Constructor con id, titulo, genero y desarrolladora
     public Juego(int id, String titulo, String genero, Desarrolladora desarrolladora) {
         this.id = id;
         this.titulo = titulo;
@@ -30,6 +34,7 @@ public class Juego {
         this.desarrolladora = desarrolladora;
     }
 
+    // Constructor full equip
     public Juego(int id, String titulo, String genero, Desarrolladora desarrolladora, List<Comentario> comentarios) {
         this.id = id;
         this.titulo = titulo;
@@ -37,6 +42,8 @@ public class Juego {
         this.desarrolladora = desarrolladora;
         this.comentarios = comentarios;
     }
+
+    // Getters y setters
 
     public int getId() {
         return id;

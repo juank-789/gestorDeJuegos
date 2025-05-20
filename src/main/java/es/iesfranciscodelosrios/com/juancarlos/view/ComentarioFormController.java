@@ -35,6 +35,7 @@ public class ComentarioFormController implements Initializable {
     private static Comentario comentarioActual;
     private static Juego juegoRelacionado;
 
+
     public void setComentario(Comentario c, Juego juego) {
         this.comentario = c;
         this.juegoRelacionado = juego;
@@ -45,11 +46,19 @@ public class ComentarioFormController implements Initializable {
         }
     }
 
+    /**
+     * Método para establecer el comentario actual
+     * @param c
+     */
     public static void setComentario(Comentario c) {
         comentarioActual = c;
 
     }
 
+    /**
+     * Método para establecer el comentario actual
+     * @param c
+     */
     private void setCo(Comentario c) {
         this.comentario = c;
         if (c != null) {
@@ -59,6 +68,9 @@ public class ComentarioFormController implements Initializable {
         }
     }
 
+    /**
+     * Método para guardar el comentario
+     */
     @FXML
     private void onGuardar() {
         if (comentario == null) {
@@ -78,16 +90,27 @@ public class ComentarioFormController implements Initializable {
         cerrarVentana();
     }
 
+    /**
+     * Método para cancelar la acción
+     */
     @FXML
     private void onCancelar() {
         cerrarVentana();
     }
 
+    /**
+     * Método para cerrar la ventana
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) textoField.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Método para inicializar el controlador
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCo(comentarioActual);

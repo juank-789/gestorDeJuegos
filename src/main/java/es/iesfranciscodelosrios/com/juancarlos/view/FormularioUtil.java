@@ -10,6 +10,12 @@ import java.io.IOException;
 
 public class FormularioUtil {
 
+    /**
+     * Muestra una ventana modal con el formulario especificado.
+     * @param fxmlNombre
+     * @param tituloVentana
+     * @return la ventana mostrada
+     */
     public static Stage mostrarVentana(String fxmlNombre, String tituloVentana) {
         try {
             FXMLLoader loader = new FXMLLoader(FormularioUtil.class.getResource(fxmlNombre));

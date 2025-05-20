@@ -30,10 +30,15 @@ public class JuegoFormController implements Initializable {
     private static Juego juegoActual;
     private static Stage ventana;
 
+    /**
+     * Muestra el formulario de juego.
+     * @param juego
+     */
     public static void mostrarFormulario(Juego juego) {
         juegoActual = juego;
         ventana = FormularioUtil.mostrarVentana("JuegoForm.fxml", "Formulario de Juego");
     }
+
 
     public static void setJuego(Juego j) {
         juegoActual = j;
@@ -49,6 +54,9 @@ public class JuegoFormController implements Initializable {
         }
     }
 
+    /**
+     * Guarda el juego en la base de datos.
+     */
     @FXML
     private void onGuardar() {
         String titulo = txtTitulo.getText();
@@ -78,17 +86,28 @@ public class JuegoFormController implements Initializable {
         cerrarVentana();
     }
 
+    /**
+     * Cancela la operación y cierra la ventana.
+     */
     @FXML
     private void onCancelar() {
         cerrarVentana();
     }
 
+    /**
+     * Cierra la ventana actual.
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) txtTitulo.getScene().getWindow();
         stage.close();
     }
 
 
+    /**
+     * Inicializa el controlador.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setJu(juegoActual);

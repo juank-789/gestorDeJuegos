@@ -26,17 +26,28 @@ public class DesarrolladoraFormController implements Initializable {
     private static Stage ventana;
 
 
-
+    /**
+     * Muestra el formulario de desarrolladora.
+     * @param desarrolladora
+     */
     public static void mostrarFormulario(Desarrolladora desarrolladora) {
         desarrolladoraActual = desarrolladora;
         ventana = FormularioUtil.mostrarVentana("DesarrolladoraForm.fxml", "Formulario de Desarrolladora");
     }
 
+    /**
+     * Muestra el formulario de desarrolladora.
+     * @param d
+     */
     public static void setDesarrolladora(Desarrolladora d) {
         desarrolladoraActual = d;
 
     }
 
+    /**
+     * Muestra el formulario de desarrolladora.
+     * @param d
+     */
     private void setDes(Desarrolladora d) {
         this.desarrolladora = d;
         if (d != null) {
@@ -45,6 +56,9 @@ public class DesarrolladoraFormController implements Initializable {
         }
     }
 
+    /**
+     * Guarda la desarrolladora.
+     */
     @FXML
     private void onGuardar() {
         if (desarrolladora == null) {
@@ -66,16 +80,27 @@ public class DesarrolladoraFormController implements Initializable {
     }
 
 
+    /**
+     * Cancela la acción y cierra la ventana.
+     */
     @FXML
     private void onCancelar() {
         cerrarVentana();
     }
 
+    /**
+     * Cierra la ventana.
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) nombreField.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Inicializa el controlador.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setDes(desarrolladoraActual);

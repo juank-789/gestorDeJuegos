@@ -10,20 +10,36 @@ public class Comentario {
     private LocalDate fecha;
     private Juego juego;
 
+    /**
+     * Constructor por defecto.
+     */
     public Comentario() {
 
     }
 
+    /**
+     * Constructor con parámetros.
+     * @param id
+     */
     public Comentario(int id) {
         this.id = id;
     }
 
+    /**
+     * Constructor con parámetros.
+     * @param id
+     * @param texto
+     * @param fecha
+     * @param juego
+     */
     public Comentario(int id, String texto, LocalDate fecha, Juego juego) {
         this.id = id;
         this.texto = texto;
         this.fecha = fecha;
         this.juego = juego;
     }
+
+    // Getters y Setters
 
     public int getId() {
         return id;

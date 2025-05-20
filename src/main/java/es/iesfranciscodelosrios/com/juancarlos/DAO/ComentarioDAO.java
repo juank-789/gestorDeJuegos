@@ -22,6 +22,10 @@ public class ComentarioDAO {
     private static final String SQL_DELETE = "DELETE FROM comentario WHERE id=?";
     private static final String SQL_UPDATE = "UPDATE comentario SET texto=?, fecha=?, juego_id=? WHERE id=?";
 
+    /**
+     * * Método para obtener todos los comentarios de la base de datos.
+     * @return Lista de comentarios.
+     */
     public static List<Comentario> findAll() {
         List<Comentario> comentarios = new ArrayList<>();
         Connection con = MySQLConnection.getConnection();
@@ -46,6 +50,11 @@ public class ComentarioDAO {
         return comentarios;
     }
 
+    /**
+     * Método para obtener un comentario por su ID.
+     * @param id
+     * @return Comentario
+     */
     public static Comentario findById(int id) {
         Comentario c = null;
         Connection con = MySQLConnection.build().getConnection();
@@ -67,6 +76,11 @@ public class ComentarioDAO {
         return c;
     }
 
+    /**
+     * Método para obtener un comentario por su ID de forma "eager" (carga ansiosa).
+     * @param id
+     * @return Comentario
+     */
     public static Comentario findByIdEager(int id) {
         Comentario c = null;
         Connection con = MySQLConnection.build().getConnection();
@@ -92,6 +106,11 @@ public class ComentarioDAO {
     }
 
 
+    /**
+     * Método para obtener todos los comentarios de un juego específico.
+     * @param juego
+     * @return Lista de comentarios
+     */
     public static List<Comentario> findByJuegoEager(Juego juego) {
         List<Comentario> comentarios = new ArrayList<>();
         Connection con = MySQLConnection.build().getConnection();
@@ -114,19 +133,12 @@ public class ComentarioDAO {
         return comentarios;
     }
 
-    /*public static void insert(Comentario c) {
-        try (Connection con = MySQLConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_INSERT)) {
 
-            ps.setString(1, c.getTexto());
-            ps.setDate(2, Date.valueOf(c.getFecha()));
-            ps.setInt(3, c.getJuego().getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
+    /**
+     * Método para insertar un nuevo comentario en la base de datos.
+     * @param c
+     * @return Comentario
+     */
     public static Comentario insert(Comentario c) {
         Connection con = MySQLConnection.build().getConnection();
         try (
@@ -152,20 +164,12 @@ public class ComentarioDAO {
         }
     }
 
-    /*public static void update(Comentario c) {
-        try (Connection con = MySQLConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(SQL_UPDATE)) {
 
-            ps.setString(1, c.getTexto());
-            ps.setDate(2, Date.valueOf(c.getFecha()));
-            ps.setInt(3, c.getJuego().getId());
-            ps.setInt(4, c.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
+    /**
+     * Método para actualizar un comentario en la base de datos.
+     * @param c
+     * @return boolean
+     */
     public static boolean update(Comentario c) {
         Connection con = MySQLConnection.build().getConnection();
         try (
@@ -182,6 +186,11 @@ public class ComentarioDAO {
         }
     }
 
+    /**
+     * Método para eliminar un comentario de la base de datos.
+     * @param id
+     * @return boolean
+     */
     public static boolean delete(int id) {
         Connection con = MySQLConnection.build().getConnection();
         try (

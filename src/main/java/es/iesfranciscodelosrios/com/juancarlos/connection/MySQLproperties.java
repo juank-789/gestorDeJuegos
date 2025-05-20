@@ -15,9 +15,20 @@ public class MySQLproperties implements Serializable {
     private String user;
     private String pass;
 
+    /**
+     * Constructor de MySQLproperties
+     */
     public MySQLproperties() {
     }
 
+    /**
+     * Constructor de MySQLproperties
+     * @param ip
+     * @param port
+     * @param database
+     * @param user
+     * @param pass
+     */
     public MySQLproperties(String ip, String port, String database, String user, String pass) {
         this.ip = ip;
         this.port = port;
@@ -25,6 +36,8 @@ public class MySQLproperties implements Serializable {
         this.user = user;
         this.pass = pass;
     }
+
+    // Getters and Setters
 
     public String getIp() {
         return ip;
@@ -77,6 +90,10 @@ public class MySQLproperties implements Serializable {
                 '}';
     }
 
+    /**
+     * Método que te da la URL de connection
+     * @return String
+     */
     public String getURL() {
         return "jdbc:mysql://" + ip + ":" + port + "/" + database;
     }

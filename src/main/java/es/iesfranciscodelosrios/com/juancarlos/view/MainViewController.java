@@ -38,6 +38,9 @@ public class MainViewController {
     @FXML private TableColumn<Comentario, String> colFecha;
     @FXML private TableColumn<Comentario, String> colJuego;
 
+    /**
+     * Inicializa el controlador.
+     */
     @FXML
     public void initialize() {
         loadJuegos();
@@ -45,6 +48,9 @@ public class MainViewController {
         loadComentarios();
     }
 
+    /**
+     * Carga los juegos en la tabla.
+     */
     private void loadJuegos() {
         List<Juego> juegos = JuegoController.getAllJuegos();
         ObservableList<Juego> lista = FXCollections.observableArrayList(juegos);
@@ -59,6 +65,9 @@ public class MainViewController {
 
     }
 
+    /**
+     * Carga las desarrolladoras en la tabla.
+     */
     private void loadDesarrolladoras() {
         List<Desarrolladora> des = DesarrolladoraController.getAllDesarrolladoras();
         ObservableList<Desarrolladora> lista = FXCollections.observableArrayList(des);
@@ -67,6 +76,9 @@ public class MainViewController {
         colPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
     }
 
+    /**
+     *  Carga los comentarios en la tabla.
+     */
     private void loadComentarios() {
         List<Comentario> comentarios = ComentarioController.getAllComentarios();
         ObservableList<Comentario> lista = FXCollections.observableArrayList(comentarios);
@@ -84,6 +96,9 @@ public class MainViewController {
     // MÉTODOS JUEGOS
     // =============================
 
+    /**
+     * Abre el formulario para insertar un nuevo juego.
+     */
     @FXML
     private void onInsertJuego() {
         JuegoFormController.setJuego(null);
@@ -91,6 +106,9 @@ public class MainViewController {
         loadJuegos();
     }
 
+    /**
+     * Abre el formulario para actualizar un juego seleccionado.
+     */
     @FXML
     private void onUpdateJuego() {
 
@@ -105,6 +123,9 @@ public class MainViewController {
     }
 
 
+    /**
+     * Elimina un juego seleccionado.
+     */
     @FXML
     private void onDeleteJuego() {
         Juego j = tablaJuegos.getSelectionModel().getSelectedItem();
@@ -118,6 +139,9 @@ public class MainViewController {
     // MÉTODOS DESARROLLADORAS
     // =============================
 
+    /**
+     * Abre el formulario para insertar una nueva desarrolladora.
+     */
     @FXML
     private void onInsertDesarrolladora() {
 
@@ -127,6 +151,9 @@ public class MainViewController {
         loadDesarrolladoras();
     }
 
+    /**
+     * Abre el formulario para actualizar una desarrolladora seleccionada.
+     */
     @FXML
     private void onUpdateDesarrolladora() {
         Desarrolladora d = tablaDesarrolladoras.getSelectionModel().getSelectedItem();
@@ -138,6 +165,9 @@ public class MainViewController {
         }
     }
 
+    /**
+     * Elimina una desarrolladora seleccionada.
+     */
     @FXML
     private void onDeleteDesarrolladora() {
         Desarrolladora d = tablaDesarrolladoras.getSelectionModel().getSelectedItem();
@@ -151,6 +181,9 @@ public class MainViewController {
     // MÉTODOS COMENTARIOS
     // =============================
 
+    /**
+     * Abre el formulario para insertar un nuevo comentario.
+     */
     @FXML
     private void onInsertComentario() {
         // Insertar comentario dummy (asociado al primer juego de la tabla si hay)
@@ -160,6 +193,9 @@ public class MainViewController {
         loadComentarios();
     }
 
+    /**
+     * Abre el formulario para actualizar un comentario seleccionado.
+     */
     @FXML
     private void onUpdateComentario() {
 
@@ -174,6 +210,9 @@ public class MainViewController {
 
     }
 
+    /**
+     * Elimina un comentario seleccionado.
+     */
     @FXML
     private void onDeleteComentario() {
         Comentario c = tablaComentarios.getSelectionModel().getSelectedItem();
@@ -184,7 +223,10 @@ public class MainViewController {
     }
 
 
-
+    /**
+     * Abre un formulario modal.
+     * @param url
+     */
     public void OpenModal(String url) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(url));

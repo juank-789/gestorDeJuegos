@@ -8,6 +8,13 @@ import javax.xml.bind.Unmarshaller;
 
 
 public class XMLManager {
+    /**
+     * Método para serializar un objeto a XML
+     * @param objeto
+     * @param fileName
+     * @return
+     * @param <T>
+     */
     public static <T> boolean writeXML(T objeto, String fileName) {
         boolean result = false;
         try {
@@ -28,6 +35,13 @@ public class XMLManager {
         return result;
     }
 
+    /**
+     * Método para deserializar un objeto a XML
+     * @param objeto
+     * @param fileName
+     * @return
+     * @param <T>
+     */
     public static <T> T readXML(T objeto, String fileName) {
         T result = null;
         try {

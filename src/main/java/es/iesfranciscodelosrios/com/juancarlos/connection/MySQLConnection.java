@@ -10,6 +10,9 @@ public class MySQLConnection {
     private static MySQLConnection _instance;
     private static MySQLproperties properties;
 
+    /**
+     * Constructor de MySQLConnection
+     */
     private MySQLConnection() {
         properties = (MySQLproperties) XMLManager.readXML(new MySQLproperties(), file);
 
@@ -21,6 +24,9 @@ public class MySQLConnection {
         }
     }
 
+    /**
+     * Método para cerrar la instancia de MySQLConnection
+     */
     public static void closeConnection() {
         if (con != null) {
             try {
@@ -31,6 +37,10 @@ public class MySQLConnection {
         }
     }
 
+    /**
+     * Método para obtener la instancia de MySQLConnection
+     * @return un objeto Connection
+     */
     public static Connection getConnection() {
         if (con == null) {
             try {
@@ -42,6 +52,10 @@ public class MySQLConnection {
         return con;
     }
 
+    /**
+     * Método que devuelve el propio MySQLConnection
+     * @return un objeto MySQLConnection
+     */
     public static MySQLConnection build() {
         return new MySQLConnection();
     }

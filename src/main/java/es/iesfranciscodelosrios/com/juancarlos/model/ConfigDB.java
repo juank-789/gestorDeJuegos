@@ -10,6 +10,7 @@ public class ConfigDB {
     private String password;
 
 
+    // Getters and Setters
 
     @XmlElement
     public String getUrl() {
