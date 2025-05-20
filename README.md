@@ -1,4 +1,4 @@
-***Gestor de Juegos***
+# Gestor de Juegos
 * El proyecto "Gestor de Juegos" es una aplicación de escritorio desarrollada en Java utilizando JavaFX para la interfaz gráfica de usuario y MySQL como sistema de gestión de base de datos. Su objetivo principal es ofrecer una herramienta sencilla y eficaz para gestionar información relacionada con videojuegos desarrolladoras y comentarios del usuario
 
   ##  Diseño de Pantallas (JavaFX)
